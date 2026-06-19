@@ -1,4 +1,4 @@
-# 🐦 Twitter Clone — Next.js + GraphQL
+# 🐦 Twitter  — Next.js + GraphQL
 
 A full-featured Twitter/X clone built with **Next.js**, **GraphQL**, and **TailwindCSS**. Supports Google OAuth authentication, tweet creation with image uploads, and a social follow/unfollow system.
 
