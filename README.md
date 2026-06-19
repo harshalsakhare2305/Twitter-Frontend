@@ -1,40 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🐦 Twitter Clone — Next.js + GraphQL
 
-## Getting Started
+A full-featured Twitter/X clone built with **Next.js**, **GraphQL**, and **TailwindCSS**. Supports Google OAuth authentication, tweet creation with image uploads, and a social follow/unfollow system.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🔐 **Google OAuth Authentication** — Sign in with Google using `@react-oauth/google`
+- 🐦 **Tweet Feed** — View all tweets with author details and images
+- 📝 **Create Tweets** — Post tweets with optional image attachments (via signed S3 URLs)
+- 🖼️ **Image Uploads** — Secure pre-signed URL flow for uploading tweet images
+- 👤 **User Profiles** — View any user's profile, tweets, followers, and following count
+- 🤝 **Follow / Unfollow** — Follow and unfollow other users
+- 🔄 **Real-time UI Updates** — Optimistic updates powered by TanStack Query
+- 🎨 **Responsive UI** — Dark-themed, Twitter-like layout built with TailwindCSS
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (Pages Router) |
+| Language | TypeScript |
+| Styling | TailwindCSS v4 |
+| API | GraphQL via `graphql-request` |
+| GraphQL Client | Apollo Client + TanStack React Query |
+| Auth | Google OAuth (`@react-oauth/google`) |
+| Code Generation | GraphQL Code Generator |
+| Notifications | React Hot Toast |
+| Icons | React Icons |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Yarn
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/harshalsakhare2305/Twitter.git
+cd Twitter
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file in the root:
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000/graphql
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### Run Development Server
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+yarn dev
+```
 
-## Learn More
+This concurrently runs the **GraphQL Code Generator** (watch mode) and the **Next.js dev server**.
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+├── src/
+│   └── pages/               # Next.js pages (index, [id] user profile)
+│       └── components/      # Reusable UI components (FeedCard, TwitterLayout, etc.)
+├── graphql/
+│   ├── queries/             # GraphQL query definitions (tweets, users)
+│   └── mutations/           # GraphQL mutation definitions (tweets, follow/unfollow)
+├── graphql-clients/
+│   └── api.ts               # GraphQL client setup
+├── hooks/
+│   ├── tweet.ts             # Tweet-related custom hooks
+│   └── user.ts              # User-related custom hooks
+├── gql/                     # Auto-generated GraphQL types (via codegen)
+└── codegen.ts               # GraphQL Code Generator config
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 📡 GraphQL Operations
+
+### Queries
+- `GetAllTweets` — Fetch the full tweet feed with author info
+- `GetCurrentUser` — Get the authenticated user's profile, following, and followers
+- `GetUserById` — Fetch a specific user's profile and tweets
+- `GetSignedURLForTweet` — Get a pre-signed S3 URL for image upload
+
+### Mutations
+- `CreateTweet` — Post a new tweet with optional image
+- `FollowUser` — Follow another user
+- `UnfollowUser` — Unfollow a user
+
+---
+
+## 🌐 Deployment
+
+Deploy easily on [Vercel](https://vercel.com):
+
+```bash
+yarn build
+```
+
+Or connect your GitHub repo to Vercel for automatic deployments.
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
